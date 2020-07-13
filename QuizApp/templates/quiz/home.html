@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <div class="container">
+        <h2 class="text-center">Online Quiz Exam </h2>
+        <p class="text-center"><strong>Participte Now </strong></p>
+  <hr>
+<div style="padding-left: 50px;">
+        {% for result in results %}
+        <table>
+             <tr>
+                 <td>{{ result.id }}. {{ result.question }}</td>
+             </tr>
+             <tr>
+                <td><input type="radio" class="radiobtn" id="option1" name="{{ result.id}}" value="{{ result.option1}}">{{ result.option1}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio"  class="radiobtn" id="option2" name="{{ result.id}}" value="{{ result.option2}}">{{ result.option2}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio" class="radiobtn" id="option3" name="{{ result.id}}" value="{{ result.option3}}">{{ result.option3}}</td>
+            </tr>
+            <tr>
+                <td><input type="radio" class="radiobtn" id="option3" name="{{ result.id}}" value="{{ result.option4}}">{{ result.option4}}</td>
+            </tr>
+            <tr>
+               <td><label  class="radiobtn" id="correctanswer" 
+                style="display:none; padding-left: 10px; color: green; font-size: 22px;"> Correct answer is : {{ result.correct_anwser }} </label></td>
+            </tr>
+        </table>
+        <hr>
+        {% endfor %}
+</div>
+<button type="submit" id="btn1" class="btn btn-success" onclick="getAnswe();">See Result</button>
+
+<p id="useranswer"></p>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+$(document).ready(function(){
+ $("#btn1").click(function(){
+     $(".radiobtn").show();
+         $(".radiobtn").attr("disable",true);
+ });
+});
+function getAnswe(){
+   document.getElementById("useranswer").innerHTML="";
+   var e = document.getElementsByTagName("input");
+   for(i=0; i<e.length; i++){
+     if(e[i].type=="radio"){
+       if(e[i].checked){
+          document.getElementById("useranswer").innerHTML+="Q  "+e[i].name+" You selected is :"+e[i].value+"<br>";
+       }
+     }
+   }
+
+
+}
+
+
+  </script>
+  
+  </body>
+</html>
